@@ -2,17 +2,19 @@
 
 <div align="center">
 
-[![Test Suite](https://img.shields.io/badge/Tests-52%2F52%20Passed%20(100%25)-10b981?style=for-the-badge&logo=checkmarx&logoColor=white)](tests/index.html)
-[![Architecture](https://img.shields.io/badge/Architecture-Clean%20Modular%20ES6-6366f1?style=for-the-badge&logo=codefactor&logoColor=white)](src/)
-[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-06b6d4?style=for-the-badge&logo=w3c&logoColor=white)](index.html)
-[![Dependencies](https://img.shields.io/badge/Dependencies-Zero%20External%20Deps-8b5cf6?style=for-the-badge&logo=javascript&logoColor=white)](package.json)
-[![License](https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-10b981?style=for-the-badge&logo=githubpages&logoColor=white)](https://nilesh171.github.io/Product-Catlog-Project/)
+[![Test Suite](https://img.shields.io/badge/Tests-52%2F52%20Passed%20(100%25)-6366f1?style=for-the-badge&logo=checkmarx&logoColor=white)](https://nilesh171.github.io/Product-Catlog-Project/tests/index.html)
+[![Architecture](https://img.shields.io/badge/Architecture-Clean%20Modular%20ES6-06b6d4?style=for-the-badge&logo=codefactor&logoColor=white)](src/)
+[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-f59e0b?style=for-the-badge&logo=w3c&logoColor=white)](index.html)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero%20External%20Deps-8b5cf6?style=for-the-badge&logo=javascript&logoColor=white)](package.json)
 
 <p align="center">
-  <strong>A high-performance, responsive e-commerce product catalog featuring multi-dimensional AND filtering, deterministic sorting, resilient pagination math, bidirectional URL synchronization, and full keyboard accessibility.</strong>
+  <strong>A high-performance, responsive e-commerce product catalog featuring multi-dimensional AND filtering, deterministic sorting, resilient pagination math, bidirectional URL query state synchronization, and full keyboard accessibility.</strong>
 </p>
 
-[✨ Live Demo](http://localhost:3000) • [🧪 Test Dashboard](http://localhost:3000/tests/index.html) • [📖 Architecture](#system-architecture) • [🚀 Quickstart](#quickstart--running-locally)
+### 🌐 **[Explore the Live Deployment](https://nilesh171.github.io/Product-Catlog-Project/)**
+
+[✨ Live Application](https://nilesh171.github.io/Product-Catlog-Project/) • [🧪 Interactive Test Suite](https://nilesh171.github.io/Product-Catlog-Project/tests/index.html) • [🛠️ Architecture](#system-architecture) • [🚀 Quickstart](#quickstart--running-locally)
 
 </div>
 
@@ -92,7 +94,8 @@ Product_Catlog_Project/
 │
 ├── src/
 │   ├── data/
-│   │   └── products.json          # 36 catalog records with images & INR pricing
+│   │   ├── products.json          # 36 catalog records with images & INR pricing
+│   │   └── productsData.js        # Bundled static fallback dataset for offline/CDN resilience
 │   ├── models/
 │   │   └── Product.js             # Product domain model entity & schema validator
 │   ├── services/
@@ -185,11 +188,14 @@ To test the core specification workflow:
 
 ---
 
-## 🌐 Instant Deployment
+## 🌐 Live Deployments & Hosting
 
-* **Vercel**: Pre-configured with [`vercel.json`](file:///vercel.json). Connect your GitHub repository and deploy in 1 click.
-* **Netlify**: Pre-configured with [`netlify.toml`](file:///netlify.toml). Drag and drop the folder onto [Netlify Drop](https://app.netlify.com/drop).
-* **GitHub Pages**: Go to repository **Settings** $\to$ **Pages** $\to$ Select `main` branch and `/ (root)` folder.
+| Service | Live Link | Description |
+|---|---|---|
+| 🚀 **GitHub Pages** | **[nilesh171.github.io/Product-Catlog-Project](https://nilesh171.github.io/Product-Catlog-Project/)** | Production live deployment hosted directly on GitHub Pages |
+| 🧪 **Test Suite** | **[Live Browser Test Runner](https://nilesh171.github.io/Product-Catlog-Project/tests/index.html)** | In-browser visual test suite with real-time execution metrics |
+| ⚡ **Vercel** | Pre-configured with [`vercel.json`](file:///vercel.json) | 1-click zero-config deployment |
+| 📦 **Netlify** | Pre-configured with [`netlify.toml`](file:///netlify.toml) | Drag-and-drop or continuous Git deploy |
 
 ---
 

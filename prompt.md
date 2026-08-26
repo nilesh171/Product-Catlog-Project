@@ -2,13 +2,17 @@
 
 <div align="center">
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-10b981?style=for-the-badge&logo=githubpages&logoColor=white)](https://nilesh171.github.io/Product-Catlog-Project/)
 [![Engineering Process](https://img.shields.io/badge/Workflow-Autonomous%20AI%20SDLC-6366f1?style=for-the-badge&logo=openai&logoColor=white)](prompt.md)
-[![Verification](https://img.shields.io/badge/Test%20Verification-52%2F52%20Passed%20(100%25)-10b981?style=for-the-badge&logo=checkmarx&logoColor=white)](tests/index.html)
-[![Audit Standard](https://img.shields.io/badge/Audit-5--Persona%20Quality%20Review-06b6d4?style=for-the-badge&logo=shield&logoColor=white)](prompt.md)
+[![Verification](https://img.shields.io/badge/Test%20Verification-52%2F52%20Passed%20(100%25)-06b6d4?style=for-the-badge&logo=checkmarx&logoColor=white)](https://nilesh171.github.io/Product-Catlog-Project/tests/index.html)
 [![Architecture](https://img.shields.io/badge/Architecture-Clean%20%26%20Zero--Dependency-8b5cf6?style=for-the-badge&logo=javascript&logoColor=white)](src/)
 
 <p align="center">
   <strong>Comprehensive architectural log documenting the autonomous prompts, design decisions, adversarial debugging cycles, and multi-perspective quality reviews used to build the AuraCatalog platform.</strong>
+</p>
+
+<p align="center">
+  <strong>Live Demo: <a href="https://nilesh171.github.io/Product-Catlog-Project/">nilesh171.github.io/Product-Catlog-Project</a></strong>
 </p>
 
 </div>
