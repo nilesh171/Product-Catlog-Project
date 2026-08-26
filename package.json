@@ -1,0 +1,24 @@
+{
+  "name": "product-catalog-filters",
+  "version": "1.0.0",
+  "description": "Production-grade Product Catalog with Advanced Filtering, Sorting, and Pagination",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/run-all-tests.js",
+    "test:live": "node verify_live.js",
+    "test:watch": "node tests/run-all-tests.js --watch"
+  },
+  "keywords": [
+    "product-catalog",
+    "filtering",
+    "sorting",
+    "pagination",
+    "vanilla-js",
+    "clean-architecture",
+    "accessibility"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}

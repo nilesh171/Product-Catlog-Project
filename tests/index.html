@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuraCatalog Test Suite &amp; Specification Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/styles/tokens.css" />
+  <style>
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      margin: 0;
+      padding: 2rem;
+    }
+    .test-dashboard {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .header-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .stats-row {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .stat-badge {
+      background: var(--bg-surface-elevated);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .stat-badge.passed { color: var(--success-text); border: 1px solid var(--success-border); }
+    .stat-badge.failed { color: var(--danger-text); border: 1px solid var(--danger-border); }
+    .suite-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+    .suite-header {
+      padding: 1rem 1.5rem;
+      background: var(--bg-surface-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .test-item {
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      gap: 1rem;
+    }
+    .test-item:last-child {
+      border-bottom: none;
+    }
+    .test-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .icon-pass { color: var(--success-text); font-weight: bold; }
+    .icon-fail { color: var(--danger-text); font-weight: bold; }
+    .test-duration {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .error-box {
+      margin-top: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      color: var(--danger-text);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+    }
+    .btn-run-again {
+      background: var(--accent-primary);
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-dashboard">
+    <div class="header-box">
+      <div>
+        <h1 style="font-size: 1.5rem; margin-bottom: 0.25rem;">Automated Test Suite</h1>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">
+          Unit, boundary, sort, pagination, validation, and adversarial edge-case specs.
+        </p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div id="stats-container" class="stats-row"></div>
+        <button id="btn-rerun" class="btn-run-again" type="button">Run All Tests</button>
+      </div>
+    </div>
+
+    <div id="suites-container"></div>
+  </div>
+
+  <script type="module">
+    import { runner } from './test-framework.js';
+    import { runFilterTests } from './unit/filterService.test.js';
+    import { runSortTests } from './unit/sortService.test.js';
+    import { runPaginationTests } from './unit/paginationService.test.js';
+    import { runValidationTests } from './unit/validationService.test.js';
+    import { runStateSyncTests } from './integration/stateSync.test.js';
+    import { runCatalogFlowTests } from './integration/catalogFlow.test.js';
+    import { runEdgeCaseTests } from './adversarial/edgeCases.test.js';
+
+    // Register suites
+    runFilterTests();
+    runSortTests();
+    runPaginationTests();
+    runValidationTests();
+    runStateSyncTests();
+    runCatalogFlowTests();
+    runEdgeCaseTests();
+
+    async function executeAndRender() {
+      const suitesContainer = document.getElementById('suites-container');
+      const statsContainer = document.getElementById('stats-container');
+      suitesContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted);">Running test specifications...</p>';
+
+      const results = await runner.run();
+
+      statsContainer.innerHTML = `
+        <div class="stat-badge passed">✓ Passed: ${results.passed}</div>
+        <div class="stat-badge ${results.failed > 0 ? 'failed' : ''}">✗ Failed: ${results.failed}</div>
+        <div class="stat-badge">⏱ ${results.duration}ms</div>
+      `;
+
+      suitesContainer.innerHTML = results.suites.map(suite => `
+        <div class="suite-card">
+          <div class="suite-header">
+            <span>${suite.name}</span>
+            <span style="font-size: 0.85rem; color: ${suite.passed ? 'var(--success-text)' : 'var(--danger-text)'}">
+              ${suite.passed ? '✓ PASSED' : '✗ FAILED'}
+            </span>
+          </div>
+          <div>
+            ${suite.tests.map(t => `
+              <div class="test-item">
+                <div>
+                  <div class="test-name">
+                    <span class="${t.passed ? 'icon-pass' : 'icon-fail'}">${t.passed ? '✓' : '✗'}</span>
+                    <span>${t.name}</span>
+                  </div>
+                  ${t.error ? `<div class="error-box">${t.error.message}</div>` : ''}
+                </div>
+                <span class="test-duration">${t.duration}ms</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('btn-rerun').addEventListener('click', () => {
+      window.location.reload();
+    });
+
+    executeAndRender();
+  </script>
+</body>
+</html>
